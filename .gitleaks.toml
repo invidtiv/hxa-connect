@@ -1,0 +1,4 @@
+[allowlist]
+description = "Audited false positives"
+# README.md curl examples use placeholder tokens (AGENT_TOKEN, YOUR_ORG_API_KEY, etc.)
+paths = ["README.md"]

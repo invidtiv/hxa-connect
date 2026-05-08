@@ -1,0 +1,4 @@
+# Documentation files (example URLs trigger false positives)
+*.md
+# Test files (localhost connections expected in test environment)
+test/
