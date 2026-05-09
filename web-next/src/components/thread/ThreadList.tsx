@@ -106,7 +106,7 @@ export function ThreadList({ wsThreads }: ThreadListProps) {
             placeholder={t('thread.search')}
             value={search}
             onChange={(e) => handleSearchInput(e.target.value)}
-            className="w-full bg-black/30 border border-hxa-border rounded-lg pl-9 pr-3 py-2 text-sm text-hxa-text placeholder:text-hxa-text-muted outline-none focus:border-hxa-accent transition-colors"
+            className="w-full theme-input border border-hxa-border rounded-lg pl-9 pr-3 py-2 text-sm text-hxa-text placeholder:text-hxa-text-muted outline-none focus:border-hxa-accent transition-colors"
           />
         </div>
         <FilterSelect
@@ -136,7 +136,7 @@ export function ThreadList({ wsThreads }: ThreadListProps) {
                   'w-full text-left px-3 py-2.5 rounded-lg transition-colors group',
                   activeId === thread.id
                     ? 'bg-hxa-accent/10 border border-hxa-accent/20'
-                    : 'hover:bg-white/[0.03] border border-transparent',
+                    : 'hover:bg-hxa-bg-hover border border-transparent',
                 )}
               >
                 <div className="text-sm font-medium text-hxa-text truncate group-hover:text-hxa-accent-hover transition-colors">

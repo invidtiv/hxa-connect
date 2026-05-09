@@ -89,7 +89,7 @@ export function ThreadHeader({
   }
 
   return (
-    <div className="shrink-0 px-4 py-3 border-b border-hxa-border bg-[rgba(10,15,26,0.4)] flex items-center gap-3">
+    <div className="shrink-0 px-4 py-3 border-b border-hxa-border theme-header flex items-center gap-3">
       <div className="flex-1 min-w-0">
         <h2 className="text-sm font-semibold text-hxa-text truncate" title={topic}>{topic}</h2>
         <div className="flex items-center gap-2 mt-0.5">
@@ -112,7 +112,7 @@ export function ThreadHeader({
               {canChangeStatus && allowedTransitions.length > 0 && <ChevronDown size={8} />}
             </button>
             {statusDropdownOpen && (
-              <div className="absolute top-full left-0 mt-1 z-50 bg-[#0d1a2d] border border-hxa-border rounded-lg shadow-xl py-1 min-w-[120px]">
+              <div className="absolute top-full left-0 mt-1 z-50 theme-modal border border-hxa-border rounded-lg shadow-xl py-1 min-w-[120px]">
                 {allowedTransitions.map((s) => (
                   <button
                     key={s}
@@ -151,7 +151,7 @@ export function ThreadHeader({
               <User size={10} /> {participantCount}
             </button>
             {participantsOpen && (
-              <div className="absolute top-full left-0 mt-1 z-50 bg-[#0d1a2d] border border-hxa-border rounded-lg shadow-xl py-2 px-3 min-w-[180px] max-w-[260px]">
+              <div className="absolute top-full left-0 mt-1 z-50 theme-modal border border-hxa-border rounded-lg shadow-xl py-2 px-3 min-w-[180px] max-w-[260px]">
                 <div className="flex items-center justify-between mb-2">
                   <span className="text-xs font-semibold text-hxa-text">{t('thread.participants', { count: participantCount })}</span>
                   <button onClick={() => setParticipantsOpen(false)} className="text-hxa-text-muted hover:text-hxa-text">
@@ -202,7 +202,7 @@ export function ThreadHeader({
         {onInviteBot && (
           <button
             onClick={onInviteBot}
-            className="text-xs text-hxa-text-muted border border-hxa-border px-2 py-1.5 rounded-md hover:bg-white/[0.04] hover:text-hxa-text transition-colors flex items-center gap-1"
+            className="text-xs text-hxa-text-muted border border-hxa-border px-2 py-1.5 rounded-md hover:bg-hxa-bg-hover hover:text-hxa-text transition-colors flex items-center gap-1"
             title={t('thread.inviteBot')}
           >
             <UserPlus size={12} />
@@ -212,7 +212,7 @@ export function ThreadHeader({
         {canManageSettings && onOpenSettings && (
           <button
             onClick={onOpenSettings}
-            className="text-xs text-hxa-text-muted border border-hxa-border px-2 py-1.5 rounded-md hover:bg-white/[0.04] hover:text-hxa-text transition-colors flex items-center gap-1"
+            className="text-xs text-hxa-text-muted border border-hxa-border px-2 py-1.5 rounded-md hover:bg-hxa-bg-hover hover:text-hxa-text transition-colors flex items-center gap-1"
             title={t('thread.settings')}
           >
             <Settings size={12} />

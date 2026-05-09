@@ -22,6 +22,7 @@ import { ThreadHeader, type ThreadParticipantInfo } from '@/components/thread/Th
 import { ThreadSettingsPanel } from '@/components/thread/ThreadSettingsPanel';
 import { InviteToThreadDialog } from '@/components/thread/InviteToThreadDialog';
 import { useTranslations } from '@/i18n/context';
+import { ThemeSwitcher } from '@/components/ui/ThemeSwitcher';
 
 const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH ?? '';
 
@@ -42,8 +43,8 @@ function ConfirmDialog({ title, message, confirmLabel, danger, onConfirm, onCanc
 }) {
   const { t } = useTranslations();
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60" onClick={onCancel}>
-      <div className="bg-[#0d1a2d] border border-hxa-border rounded-xl p-6 max-w-md w-full mx-4 shadow-2xl" onClick={e => e.stopPropagation()}>
+    <div className="fixed inset-0 z-50 flex items-center justify-center theme-overlay" onClick={onCancel}>
+      <div className="theme-modal border border-hxa-border rounded-xl p-6 max-w-md w-full mx-4 shadow-2xl" onClick={e => e.stopPropagation()}>
         <h3 className="text-lg font-semibold mb-2">{title}</h3>
         <p className="text-hxa-text-dim text-sm mb-4">{message}</p>
         <div className="flex justify-end gap-3">
@@ -61,14 +62,14 @@ function SecretModal({ title, secret, onClose }: { title: string; secret: string
   const [copied, setCopied] = useState(false);
   const { t } = useTranslations();
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60" onClick={onClose}>
-      <div className="bg-[#0d1a2d] border border-hxa-border rounded-xl p-6 max-w-lg w-full mx-4 shadow-2xl" onClick={e => e.stopPropagation()}>
+    <div className="fixed inset-0 z-50 flex items-center justify-center theme-overlay" onClick={onClose}>
+      <div className="theme-modal border border-hxa-border rounded-xl p-6 max-w-lg w-full mx-4 shadow-2xl" onClick={e => e.stopPropagation()}>
         <div className="flex justify-between items-center mb-4">
           <h3 className="text-lg font-semibold">{title}</h3>
           <button onClick={onClose} className="text-hxa-text-dim hover:text-hxa-text"><X size={18} /></button>
         </div>
         <p className="text-hxa-amber text-xs mb-3">{t('org.secretShownOnce')}</p>
-        <div className="bg-black/40 border border-hxa-border rounded-lg p-3 font-mono text-sm break-all text-hxa-accent mb-4">{secret}</div>
+        <div className="theme-code border border-hxa-border rounded-lg p-3 font-mono text-sm break-all text-hxa-accent mb-4">{secret}</div>
         <button
           onClick={() => { navigator.clipboard.writeText(secret); setCopied(true); setTimeout(() => setCopied(false), 2000); }}
           className="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-hxa-accent/20 text-hxa-accent rounded-lg hover:bg-hxa-accent/30 text-sm font-medium border border-hxa-accent/30"
@@ -510,7 +511,7 @@ export default function OrgDashboard() {
       )}
 
       {/* Header — 56px desktop, 48px mobile */}
-      <header className="border-b border-hxa-border bg-[rgba(10,15,26,0.8)] backdrop-blur-[12px] shrink-0 z-10 h-14 md:h-14 max-md:h-12">
+      <header className="border-b border-hxa-border theme-header backdrop-blur-[12px] shrink-0 z-10 h-14 md:h-14 max-md:h-12">
         <div className="px-5 max-md:px-3 h-full flex items-center gap-4 max-md:gap-2">
           <button onClick={() => setSidebarOpen(!sidebarOpen)} className="md:hidden text-hxa-text-dim hover:text-hxa-text p-1">
             <Menu size={20} />
@@ -524,7 +525,7 @@ export default function OrgDashboard() {
             <Plus size={14} /> <span className="hidden sm:inline">{t('org.inviteBot')}</span>
           </button>
           <button onClick={() => navigateTo(view.type === 'settings' ? { type: 'empty' } : { type: 'settings' })} className={`inline-flex items-center gap-1.5 px-3.5 py-1.5 text-[13px] rounded-lg border transition-colors max-md:px-2 max-md:gap-0 ${
-            view.type === 'settings' ? 'bg-hxa-accent/20 text-hxa-accent border-hxa-accent/40' : 'bg-white/[0.04] text-hxa-text-dim border-hxa-border hover:bg-white/[0.08] hover:text-hxa-text'
+            view.type === 'settings' ? 'bg-hxa-accent/20 text-hxa-accent border-hxa-accent/40' : 'theme-code text-hxa-text-dim border-hxa-border hover:bg-hxa-bg-hover hover:text-hxa-text'
           }`}>
             <Settings size={14} /> <span className="hidden sm:inline">{t('org.settings')}</span>
           </button>
@@ -547,6 +548,7 @@ export default function OrgDashboard() {
             <span className={`w-2 h-2 rounded-full ${wsConnected ? 'bg-hxa-green animate-pulse' : 'bg-hxa-red'}`} />
             <span className="text-hxa-text-dim">{wsConnected ? t('header.connected') : t('header.disconnected')}</span>
           </div>
+          <ThemeSwitcher />
           <button onClick={() => setConfirm({
             title: t('org.logoutTitle'),
             message: t('org.logoutMessage'),
@@ -563,10 +565,10 @@ export default function OrgDashboard() {
       <div className="flex flex-1 overflow-hidden relative">
         {/* Sidebar overlay (mobile) */}
         {sidebarOpen && (
-          <div className="fixed inset-0 bg-black/60 backdrop-blur-[4px] z-[999] md:hidden" onClick={() => setSidebarOpen(false)} />
+          <div className="fixed inset-0 theme-overlay backdrop-blur-[4px] z-[999] md:hidden" onClick={() => setSidebarOpen(false)} />
         )}
         {/* Sidebar — 300px desktop inline, 280px mobile fixed drawer */}
-        <aside className={`flex flex-col w-[300px] border-r border-hxa-border bg-[rgba(16,22,36,0.4)] backdrop-blur-[20px] shrink-0 max-md:fixed max-md:top-0 max-md:left-0 max-md:bottom-0 max-md:w-[280px] max-md:z-[1000] max-md:transition-transform max-md:duration-300 ${sidebarOpen ? 'max-md:translate-x-0' : 'max-md:-translate-x-full'}`}>
+        <aside className={`flex flex-col w-[300px] border-r border-hxa-border theme-sidebar backdrop-blur-[20px] shrink-0 max-md:fixed max-md:top-0 max-md:left-0 max-md:bottom-0 max-md:w-[280px] max-md:z-[1000] max-md:transition-transform max-md:duration-300 ${sidebarOpen ? 'max-md:translate-x-0' : 'max-md:-translate-x-full'}`}>
           {/* Sidebar tabs */}
           <div className="flex border-b border-hxa-border">
             <button
@@ -598,7 +600,7 @@ export default function OrgDashboard() {
                     placeholder={t('org.search.bots')}
                     value={botSearch}
                     onChange={e => setBotSearch(e.target.value)}
-                    className="w-full bg-black/30 border border-hxa-border rounded-lg pl-8 pr-3 py-2 text-xs outline-none focus:border-hxa-accent"
+                    className="w-full theme-input border border-hxa-border rounded-lg pl-8 pr-3 py-2 text-xs outline-none focus:border-hxa-accent"
                   />
                 </div>
               </div>
@@ -643,7 +645,7 @@ export default function OrgDashboard() {
                     placeholder={t('org.search.threads')}
                     value={threadSearch}
                     onChange={e => setThreadSearch(e.target.value)}
-                    className="w-full bg-black/30 border border-hxa-border rounded-lg pl-8 pr-3 py-2 text-xs outline-none focus:border-hxa-accent"
+                    className="w-full theme-input border border-hxa-border rounded-lg pl-8 pr-3 py-2 text-xs outline-none focus:border-hxa-accent"
                   />
                 </div>
                 <FilterSelect
@@ -700,7 +702,7 @@ export default function OrgDashboard() {
                 {/* Activity cards — 3-col grid desktop, 1-col mobile */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
                   {/* Active Bots */}
-                  <div className="glass bg-[rgba(10,15,26,0.6)] border border-hxa-border rounded-xl p-4">
+                  <div className="glass theme-panel border border-hxa-border rounded-xl p-4">
                     <h3 className="text-sm font-semibold text-hxa-text-dim uppercase tracking-wider mb-3">{t('org.activeBots')}</h3>
                     <div className="space-y-2">
                       {sortedBots.slice(0, 5).map(bot => (
@@ -715,7 +717,7 @@ export default function OrgDashboard() {
                     </div>
                   </div>
                   {/* Recent Threads */}
-                  <div className="glass bg-[rgba(10,15,26,0.6)] border border-hxa-border rounded-xl p-4">
+                  <div className="glass theme-panel border border-hxa-border rounded-xl p-4">
                     <h3 className="text-sm font-semibold text-hxa-text-dim uppercase tracking-wider mb-3">{t('org.recentThreads')}</h3>
                     <div className="space-y-2">
                       {threads.slice(0, 5).map(thread => (
@@ -729,7 +731,7 @@ export default function OrgDashboard() {
                     </div>
                   </div>
                   {/* Recent Channels */}
-                  <div className="glass bg-[rgba(10,15,26,0.6)] border border-hxa-border rounded-xl p-4">
+                  <div className="glass theme-panel border border-hxa-border rounded-xl p-4">
                     <h3 className="text-sm font-semibold text-hxa-text-dim uppercase tracking-wider mb-3">{t('org.recentChannels')}</h3>
                     <div className="space-y-2">
                       {channels.slice(0, 5).map(ch => {
@@ -875,7 +877,7 @@ function BotProfileView({ bot, showToast, onViewChannel, onDeleted, onRoleChange
       )}
 
       {/* Centered card — matches original bot-profile-card (max 680px) */}
-      <div className="max-w-[680px] mx-auto bg-[rgba(16,22,36,0.6)] border border-hxa-border rounded-xl p-8 max-md:p-5 shadow-[0_8px_32px_rgba(0,0,0,0.2)] space-y-8">
+      <div className="max-w-[680px] mx-auto theme-panel border border-hxa-border rounded-xl p-8 max-md:p-5 shadow-[0_8px_32px_rgba(0,0,0,0.2)] space-y-8">
         {/* Header with avatar */}
         <div className="flex items-center gap-5 mb-8">
           <div className="w-20 h-20 max-md:w-14 max-md:h-14 rounded-[20px] bg-gradient-to-br from-hxa-accent/20 to-hxa-purple/20 border border-hxa-accent/30 flex items-center justify-center shrink-0">
@@ -946,7 +948,7 @@ function BotProfileView({ bot, showToast, onViewChannel, onDeleted, onRoleChange
         )}
 
         {/* Role */}
-        <div className="glass bg-[rgba(10,15,26,0.6)] border border-hxa-border rounded-xl p-4">
+        <div className="glass theme-panel border border-hxa-border rounded-xl p-4">
           <h3 className="text-sm font-semibold text-hxa-text-dim uppercase tracking-wider mb-3">{t('org.bot.authRole')}</h3>
           <div className="flex items-center justify-between">
             <span className="text-xs text-hxa-text-dim">
@@ -955,7 +957,7 @@ function BotProfileView({ bot, showToast, onViewChannel, onDeleted, onRoleChange
             <select
               value={bot.auth_role}
               onChange={e => handleRoleChange(e.target.value as 'admin' | 'member')}
-              className="bg-black/30 border border-hxa-border rounded-lg px-3 py-1.5 text-sm outline-none focus:border-hxa-accent"
+              className="theme-input border border-hxa-border rounded-lg px-3 py-1.5 text-sm outline-none focus:border-hxa-accent"
             >
               <option value="admin">{t('org.bot.roleAdmin')}</option>
               <option value="member">{t('org.bot.roleMember')}</option>
@@ -964,7 +966,7 @@ function BotProfileView({ bot, showToast, onViewChannel, onDeleted, onRoleChange
         </div>
 
         {/* Details */}
-        <div className="glass bg-[rgba(10,15,26,0.6)] border border-hxa-border rounded-xl p-4 space-y-3">
+        <div className="glass theme-panel border border-hxa-border rounded-xl p-4 space-y-3">
           <h3 className="text-sm font-semibold text-hxa-text-dim uppercase tracking-wider">{t('org.bot.details')}</h3>
           <div className="grid grid-cols-2 gap-3 text-sm">
             {bot.bio && <div className="col-span-2"><span className="text-hxa-text-dim">{t('org.bot.bio')}</span> {bot.bio}</div>}
@@ -990,7 +992,7 @@ function BotProfileView({ bot, showToast, onViewChannel, onDeleted, onRoleChange
 
         {/* Channels */}
         {channels.length > 0 && (
-          <div className="glass bg-[rgba(10,15,26,0.6)] border border-hxa-border rounded-xl p-4">
+          <div className="glass theme-panel border border-hxa-border rounded-xl p-4">
             <h3 className="text-sm font-semibold text-hxa-text-dim uppercase tracking-wider mb-3">{t('org.bot.dmChannels')}</h3>
             <div className="space-y-2">
               {channels.map(ch => {
@@ -1002,7 +1004,7 @@ function BotProfileView({ bot, showToast, onViewChannel, onDeleted, onRoleChange
                   <button
                     key={ch.id}
                     onClick={() => onViewChannel(ch.id, label)}
-                    className="w-full text-left px-3 py-2 text-sm bg-black/20 border border-hxa-border/50 rounded-lg hover:bg-hxa-bg-hover transition-colors"
+                    className="w-full text-left px-3 py-2 text-sm theme-code border border-hxa-border/50 rounded-lg hover:bg-hxa-bg-hover transition-colors"
                   >
                     <span className="text-hxa-accent">{label}</span>
                     {ch.last_activity_at && <span className="text-hxa-text-dim text-xs ml-2">{timeAgo(ch.last_activity_at)}</span>}
@@ -1378,7 +1380,7 @@ function ThreadView({ thread, showToast, onStatusChanged, onThreadUpdated, wsRef
                   )}
                   <span className="text-[10px] text-hxa-text-muted">{timeAgo(msg.created_at)}</span>
                 </div>
-                <div className="rounded-lg px-3 py-2 text-sm leading-relaxed bg-white/[0.03] border border-white/[0.06]">{renderParts(msg)}</div>
+                <div className="rounded-lg px-3 py-2 text-sm leading-relaxed theme-code border border-hxa-border">{renderParts(msg)}</div>
               </div>
             );
           })}
@@ -1388,7 +1390,7 @@ function ThreadView({ thread, showToast, onStatusChanged, onThreadUpdated, wsRef
 
       {/* Artifacts side panel */}
       {artifactsOpen && (
-        <div className="w-[340px] shrink-0 border-l border-hxa-border bg-[rgba(10,15,26,0.6)] flex flex-col max-md:fixed max-md:inset-0 max-md:w-full max-md:z-[1000] max-md:bg-[#0a0f1a]">
+        <div className="w-[340px] shrink-0 border-l border-hxa-border theme-panel flex flex-col max-md:fixed max-md:inset-0 max-md:w-full max-md:z-[1000] max-md:bg-hxa-bg-modal">
           <div className="flex items-center justify-between px-4 py-3 border-b border-hxa-border shrink-0">
             <h3 className="text-sm font-semibold text-hxa-text flex items-center gap-1.5">
               <FileCode size={14} className="text-hxa-accent" />
@@ -1406,8 +1408,8 @@ function ThreadView({ thread, showToast, onStatusChanged, onThreadUpdated, wsRef
               <p className="text-hxa-text-dim text-sm text-center py-8">{t('artifact.noArtifacts')}</p>
             ) : (
               artifacts.map(art => (
-                <details key={art.id} className="border border-hxa-border rounded-lg overflow-hidden bg-black/20">
-                  <summary className="flex items-center gap-2 px-3 py-2.5 cursor-pointer select-none hover:bg-white/[0.02] transition-colors">
+                <details key={art.id} className="border border-hxa-border rounded-lg overflow-hidden theme-code">
+                  <summary className="flex items-center gap-2 px-3 py-2.5 cursor-pointer select-none hover:bg-hxa-bg-hover transition-colors">
                     <FileCode size={14} className="text-hxa-accent shrink-0" />
                     <div className="flex-1 min-w-0">
                       <div className="text-xs font-semibold text-hxa-text truncate font-mono">{art.title || art.artifact_key}</div>
@@ -1421,7 +1423,7 @@ function ThreadView({ thread, showToast, onStatusChanged, onThreadUpdated, wsRef
                       {art.type === 'markdown' ? (
                         <div className="text-xs"><MarkdownContent content={art.content} /></div>
                       ) : (
-                        <pre className="bg-black/40 border border-hxa-border rounded p-2 text-xs font-mono overflow-x-auto whitespace-pre-wrap">
+                        <pre className="theme-code border border-hxa-border rounded p-2 text-xs font-mono overflow-x-auto whitespace-pre-wrap">
                           {art.content}
                         </pre>
                       )}
@@ -1521,7 +1523,7 @@ function OrgSettingsView({ showToast }: {
         </div>
 
         {/* Bot Join Approval */}
-        <div className="glass bg-[rgba(10,15,26,0.6)] border border-hxa-border rounded-xl p-5">
+        <div className="glass theme-panel border border-hxa-border rounded-xl p-5">
           <h3 className="text-sm font-semibold text-hxa-text-dim uppercase tracking-wider mb-4">{t('org.settings.botJoin')}</h3>
           <div className="flex items-center justify-between gap-4">
             <div className="flex-1">
@@ -1535,7 +1537,7 @@ function OrgSettingsView({ showToast }: {
               onClick={() => updateSetting('join_approval_required', !settings.join_approval_required)}
               disabled={saving !== null}
               className={`relative w-11 h-6 rounded-full transition-colors duration-200 shrink-0 ${
-                settings.join_approval_required ? 'bg-hxa-accent' : 'bg-white/10'
+                settings.join_approval_required ? 'bg-hxa-accent' : 'bg-hxa-bg-hover'
               } ${saving !== null ? 'opacity-50' : 'cursor-pointer'}`}
             >
               <span className={`absolute top-0.5 left-0.5 w-5 h-5 rounded-full bg-white shadow transition-transform duration-200 ${
@@ -1546,7 +1548,7 @@ function OrgSettingsView({ showToast }: {
         </div>
 
         {/* Rate Limits */}
-        <div className="glass bg-[rgba(10,15,26,0.6)] border border-hxa-border rounded-xl p-5">
+        <div className="glass theme-panel border border-hxa-border rounded-xl p-5">
           <h3 className="text-sm font-semibold text-hxa-text-dim uppercase tracking-wider mb-4">{t('org.settings.rateLimits')}</h3>
           <div className="space-y-4">
             <SettingsNumberField
@@ -1574,7 +1576,7 @@ function OrgSettingsView({ showToast }: {
         </div>
 
         {/* Retention */}
-        <div className="glass bg-[rgba(10,15,26,0.6)] border border-hxa-border rounded-xl p-5">
+        <div className="glass theme-panel border border-hxa-border rounded-xl p-5">
           <h3 className="text-sm font-semibold text-hxa-text-dim uppercase tracking-wider mb-4">{t('org.settings.retention')}</h3>
           <div className="space-y-4">
             <SettingsNumberField
@@ -1651,7 +1653,7 @@ function SettingsNumberField({ label, value, onSave, saving, nullable, min }: {
             onKeyDown={e => { if (e.key === 'Enter') handleSave(); if (e.key === 'Escape') { setInvalid(false); setEditing(false); } }}
             min={min}
             placeholder={nullable ? t('org.settings.nullHint') : undefined}
-            className={`w-24 bg-black/30 border rounded-lg px-3 py-1.5 text-sm outline-none text-right font-mono transition-colors ${
+            className={`w-24 theme-input border rounded-lg px-3 py-1.5 text-sm outline-none text-right font-mono transition-colors ${
               invalid ? 'border-hxa-red text-hxa-red' : 'border-hxa-border focus:border-hxa-accent'
             }`}
             autoFocus
@@ -1726,8 +1728,8 @@ function TicketModal({ orgId, orgName, onClose }: {
   }
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-[4px] modal-overlay" onClick={onClose}>
-      <div className="bg-[#0d1a2d] border border-hxa-border rounded-2xl py-7 px-8 max-w-[440px] w-[90%] shadow-[0_20px_60px_rgba(0,0,0,0.5)] text-left modal-content" onClick={e => e.stopPropagation()}>
+    <div className="fixed inset-0 z-50 flex items-center justify-center theme-overlay backdrop-blur-[4px] modal-overlay" onClick={onClose}>
+      <div className="theme-modal border border-hxa-border rounded-2xl py-7 px-8 max-w-[440px] w-[90%] shadow-[0_20px_60px_rgba(0,0,0,0.18)] text-left modal-content" onClick={e => e.stopPropagation()}>
         {/* Header with icon */}
         <div className="flex items-center gap-2.5 mb-4">
           <Users size={22} className="text-hxa-accent" />
@@ -1745,7 +1747,7 @@ function TicketModal({ orgId, orgName, onClose }: {
               <select
                 value={expiresIn}
                 onChange={e => setExpiresIn(e.target.value)}
-                className="w-full py-2 px-3 bg-white/[0.04] border border-hxa-border rounded-lg text-hxa-text text-[13px] outline-none focus:border-hxa-accent/40 cursor-pointer appearance-none"
+                className="w-full py-2 px-3 theme-code border border-hxa-border rounded-lg text-hxa-text text-[13px] outline-none focus:border-hxa-accent/40 cursor-pointer appearance-none"
               >
                 <option value="1800">{t('org.ticket.expire.30m')}</option>
                 <option value="3600">{t('org.ticket.expire.1h')}</option>
@@ -1770,7 +1772,7 @@ function TicketModal({ orgId, orgName, onClose }: {
             </div>
             {error && <p className="text-hxa-red text-sm mb-3">{error}</p>}
             <div className="flex gap-3 justify-center mt-5">
-              <button type="button" onClick={onClose} className="py-2 px-6 rounded-lg text-[13px] font-semibold bg-white/[0.06] border border-white/10 text-hxa-text-dim hover:bg-white/10 hover:border-white/15 transition-colors">
+              <button type="button" onClick={onClose} className="py-2 px-6 rounded-lg text-[13px] font-semibold theme-code border border-hxa-border text-hxa-text-dim hover:bg-hxa-bg-hover hover:border-hxa-border-glow transition-colors">
                 {t('org.ticket.cancel')}
               </button>
               <button type="button" onClick={handleCreate} disabled={loading} className="py-2 px-6 rounded-lg text-[13px] font-semibold bg-hxa-accent/15 border border-hxa-accent/30 text-hxa-accent hover:bg-hxa-accent/25 hover:border-hxa-accent/50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
@@ -1786,9 +1788,9 @@ function TicketModal({ orgId, orgName, onClose }: {
               const prompt = `Please join the HXA-Connect organization "${orgName}" using the following credentials:\n\n- Hub URL: ${hubUrl}\n- Org Name: ${orgName}\n- Org ID: ${orgId}\n- Registration Ticket: ${result.ticket}\n\nFollow the instructions at ${hubUrl}/skill.md to complete the registration.`;
               return (
                 <>
-                  <div className="bg-white/[0.03] border border-hxa-border rounded-[10px] p-4">
+                  <div className="theme-code border border-hxa-border rounded-[10px] p-4">
                     <div className="text-[11px] font-semibold uppercase tracking-wider text-hxa-text-dim mb-2 text-center">{t('org.ticket.promptLabel')}</div>
-                    <pre className="font-mono text-xs text-hxa-text leading-relaxed whitespace-pre-wrap break-words bg-black/20 rounded-md p-3 mb-3 max-h-[200px] overflow-auto select-all">{prompt}</pre>
+                    <pre className="font-mono text-xs text-hxa-text leading-relaxed whitespace-pre-wrap break-words theme-code rounded-md p-3 mb-3 max-h-[200px] overflow-auto select-all">{prompt}</pre>
                     <div className="flex justify-center">
                       <button
                         onClick={() => { navigator.clipboard.writeText(prompt); setCopied(true); setTimeout(() => setCopied(false), 2000); }}
@@ -1807,7 +1809,7 @@ function TicketModal({ orgId, orgName, onClose }: {
                     {t('org.ticket.sendHint')}
                   </p>
                   <div className="flex gap-3 justify-center mt-5">
-                    <button type="button" onClick={onClose} className="py-2 px-6 rounded-lg text-[13px] font-semibold bg-white/[0.06] border border-white/10 text-hxa-text-dim hover:bg-white/10 hover:border-white/15 transition-colors">
+                    <button type="button" onClick={onClose} className="py-2 px-6 rounded-lg text-[13px] font-semibold theme-code border border-hxa-border text-hxa-text-dim hover:bg-hxa-bg-hover hover:border-hxa-border-glow transition-colors">
                       {t('org.ticket.close')}
                     </button>
                     <button type="button" onClick={resetForm} className="py-2 px-6 rounded-lg text-[13px] font-semibold bg-hxa-accent/15 border border-hxa-accent/30 text-hxa-accent hover:bg-hxa-accent/25 hover:border-hxa-accent/50 transition-colors">

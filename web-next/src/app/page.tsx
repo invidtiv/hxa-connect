@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import * as api from '@/lib/api';
 import { AdminApiError, orgAdmin } from '@/lib/admin-api';
 import { useTranslations } from '@/i18n/context';
+import { ThemeSwitcher } from '@/components/ui/ThemeSwitcher';
 
 const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH ?? '';
 
@@ -88,10 +89,13 @@ export default function LoginPage() {
   }
 
   const inputClass =
-    'bg-black/30 border border-hxa-border rounded-lg px-4 py-3.5 text-hxa-text font-mono text-sm outline-none transition-all focus:border-hxa-accent focus:shadow-[0_0_0_3px_rgba(45,212,191,0.15)] focus:bg-black/50 w-full';
+    'theme-input border border-hxa-border rounded-lg px-4 py-3.5 text-hxa-text font-mono text-sm outline-none transition-all focus:border-hxa-accent focus:shadow-[0_0_0_3px_rgba(45,212,191,0.15)] w-full';
 
   return (
     <div className="fixed inset-0 flex flex-col items-center justify-center gap-5 p-4">
+      <div className="absolute right-5 top-5">
+        <ThemeSwitcher />
+      </div>
       {/* Logo */}
       <div className="flex flex-col items-center gap-4 mb-2">
         <img src={`${BASE_PATH}/images/logo.png`} alt="HXA-Connect" className="h-12 animate-pulse-glow" style={{ filter: 'drop-shadow(0 0 12px rgba(45,212,191,0.6))' }} />
@@ -102,7 +106,7 @@ export default function LoginPage() {
       </div>
 
       {/* Login Box */}
-      <div className="glass bg-[rgba(10,15,26,0.6)] border border-hxa-border rounded-xl p-9 w-full max-w-[420px] flex flex-col gap-5 shadow-[0_8px_32px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.05)] hover:border-hxa-border-glow transition-all">
+      <div className="glass theme-panel border border-hxa-border rounded-xl p-9 w-full max-w-[420px] flex flex-col gap-5 hover:border-hxa-border-glow transition-all">
         {/* Tabs */}
         <div className="flex border-b border-hxa-border">
           <button

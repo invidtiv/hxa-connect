@@ -5,6 +5,7 @@ import { LogOut, Menu } from 'lucide-react';
 import { useSession } from '@/hooks/useSession';
 import { useRouter } from 'next/navigation';
 import { useTranslations, useLocale } from '@/i18n/context';
+import { ThemeSwitcher } from '@/components/ui/ThemeSwitcher';
 
 interface HeaderProps {
   onMenuToggle?: () => void;
@@ -17,7 +18,7 @@ function LanguageSwitcher() {
   return (
     <button
       onClick={() => setLocale(locale === 'en' ? 'zh' : 'en')}
-      className="text-sm px-2 py-1 rounded hover:bg-white/10 transition-colors text-hxa-text-dim hover:text-hxa-text"
+      className="text-sm px-2 py-1 rounded hover:bg-hxa-bg-hover transition-colors text-hxa-text-dim hover:text-hxa-text"
       title={locale === 'en' ? t('header.langSwitch.titleZh') : t('header.langSwitch.titleEn')}
     >
       {locale === 'en' ? t('header.langSwitch.zh') : t('header.langSwitch.en')}
@@ -37,7 +38,7 @@ export function Header({ onMenuToggle, wsConnected }: HeaderProps) {
   }
 
   return (
-    <header className="glass bg-[rgba(10,15,26,0.8)] border-b border-hxa-border flex items-center px-5 max-md:px-3 gap-4 max-md:gap-2 h-14 max-md:h-12 shrink-0 z-10">
+    <header className="glass theme-header border-b border-hxa-border flex items-center px-5 max-md:px-3 gap-4 max-md:gap-2 h-14 max-md:h-12 shrink-0 z-10">
       {/* Mobile menu button */}
       <button
         onClick={onMenuToggle}
@@ -65,11 +66,12 @@ export function Header({ onMenuToggle, wsConnected }: HeaderProps) {
 
       {/* Language Switcher */}
       <LanguageSwitcher />
+      <ThemeSwitcher />
 
       {/* Session info */}
       {session && (
         <div className="flex items-center gap-2 max-md:gap-1.5">
-          <div className="text-xs font-mono flex items-center gap-1.5 text-hxa-text-dim bg-black/30 px-2.5 py-1.5 rounded-full border border-hxa-border">
+          <div className="text-xs font-mono flex items-center gap-1.5 text-hxa-text-dim theme-input px-2.5 py-1.5 rounded-full border border-hxa-border">
             <span className="w-2 h-2 rounded-full inline-block shadow-[0_0_6px_currentColor] bg-hxa-green text-hxa-green shrink-0" />
             <span className="truncate max-w-[60px] sm:max-w-none">{session.owner_name}</span>
             <span className="text-hxa-text-muted truncate max-w-[80px] sm:max-w-none">{session.bot?.name ?? ''}</span>
@@ -86,8 +88,8 @@ export function Header({ onMenuToggle, wsConnected }: HeaderProps) {
 
       {/* Logout confirmation */}
       {showLogoutConfirm && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60" onClick={() => setShowLogoutConfirm(false)}>
-          <div className="bg-[#0d1a2d] border border-hxa-border rounded-xl p-6 max-w-md w-full mx-4 shadow-2xl" onClick={e => e.stopPropagation()}>
+        <div className="fixed inset-0 z-50 flex items-center justify-center theme-overlay" onClick={() => setShowLogoutConfirm(false)}>
+          <div className="theme-modal border border-hxa-border rounded-xl p-6 max-w-md w-full mx-4 shadow-2xl" onClick={e => e.stopPropagation()}>
             <h3 className="text-lg font-semibold mb-2">{t('header.logoutTitle')}</h3>
             <p className="text-hxa-text-dim text-sm mb-4">{t('header.logoutMessage')}</p>
             <div className="flex justify-end gap-3">

@@ -128,7 +128,7 @@ export function DMList({ wsDmMessages, wsNewChannels }: DMListProps) {
                   'w-full text-left px-3 py-2.5 rounded-lg transition-colors group',
                   activeId === item.channel.id
                     ? 'bg-hxa-accent/10 border border-hxa-accent/20'
-                    : 'hover:bg-white/[0.03] border border-transparent',
+                    : 'hover:bg-hxa-bg-hover border border-transparent',
                 )}
               >
                 <div className="flex items-center gap-2">

@@ -26,12 +26,12 @@ export function Sidebar({ open, onClose, activeTab, onTabChange, children }: Sid
     <>
       {/* Mobile overlay */}
       {open && (
-        <div className="fixed inset-0 bg-black/60 glass z-[999] md:hidden" onClick={onClose} />
+        <div className="fixed inset-0 theme-overlay glass z-[999] md:hidden" onClick={onClose} />
       )}
 
       <aside
         className={cn(
-          'glass bg-hxa-bg-secondary border-r border-hxa-border flex flex-col w-[300px] shrink-0 overflow-hidden',
+          'glass theme-sidebar border-r border-hxa-border flex flex-col w-[300px] shrink-0 overflow-hidden',
           'max-md:fixed max-md:top-0 max-md:left-0 max-md:bottom-0 max-md:z-[1000] max-md:transition-transform max-md:duration-300',
           open ? 'max-md:translate-x-0' : 'max-md:-translate-x-full',
         )}
@@ -45,7 +45,7 @@ export function Sidebar({ open, onClose, activeTab, onTabChange, children }: Sid
         </button>
 
         {/* Tabs */}
-        <div className="flex shrink-0 border-b border-hxa-border bg-black/20">
+        <div className="flex shrink-0 border-b border-hxa-border theme-input">
           {tabs.map((tab) => (
             <button
               key={tab.id}
@@ -54,7 +54,7 @@ export function Sidebar({ open, onClose, activeTab, onTabChange, children }: Sid
                 'flex-1 py-3.5 text-center text-sm font-semibold relative transition-colors',
                 activeTab === tab.id
                   ? 'text-hxa-accent'
-                  : 'text-hxa-text-dim hover:text-hxa-text hover:bg-white/[0.02]',
+                  : 'text-hxa-text-dim hover:text-hxa-text hover:bg-hxa-bg-hover',
               )}
             >
               <span className="inline-flex items-center gap-1.5">

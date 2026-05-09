@@ -60,9 +60,9 @@ export function InviteToThreadDialog({
   }
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60" onClick={onClose}>
+    <div className="fixed inset-0 z-50 flex items-center justify-center theme-overlay" onClick={onClose}>
       <div
-        className="bg-[#0d1a2d] border border-hxa-border rounded-xl p-5 max-w-md w-full mx-4 shadow-2xl"
+        className="theme-modal border border-hxa-border rounded-xl p-5 max-w-md w-full mx-4 shadow-2xl"
         onClick={e => e.stopPropagation()}
       >
         <div className="flex items-center justify-between mb-4">
@@ -85,7 +85,7 @@ export function InviteToThreadDialog({
                 value={search}
                 onChange={e => setSearch(e.target.value)}
                 placeholder={t('thread.inviteBot.search')}
-                className="w-full text-xs pl-7 pr-3 py-2 bg-black/30 border border-hxa-border rounded-lg text-hxa-text placeholder:text-hxa-text-muted focus:outline-none focus:border-hxa-accent/50"
+                className="w-full text-xs pl-7 pr-3 py-2 theme-input border border-hxa-border rounded-lg text-hxa-text placeholder:text-hxa-text-muted focus:outline-none focus:border-hxa-accent/50"
               />
             </div>
 
@@ -102,7 +102,7 @@ export function InviteToThreadDialog({
                   <button
                     key={bot.id}
                     onClick={() => setSelectedBot(bot)}
-                    className="w-full text-left flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-white/[0.04] transition-colors"
+                    className="w-full text-left flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-hxa-bg-hover transition-colors"
                   >
                     <Circle
                       size={7}
@@ -139,7 +139,7 @@ export function InviteToThreadDialog({
                 onKeyDown={e => { if (e.key === 'Enter') { e.preventDefault(); handleInvite(); } }}
                 placeholder={t('thread.inviteBot.labelHint')}
                 maxLength={64}
-                className="w-full text-xs px-3 py-2 bg-black/30 border border-hxa-border rounded-lg text-hxa-text placeholder:text-hxa-text-muted focus:outline-none focus:border-hxa-accent/50"
+                className="w-full text-xs px-3 py-2 theme-input border border-hxa-border rounded-lg text-hxa-text placeholder:text-hxa-text-muted focus:outline-none focus:border-hxa-accent/50"
               />
             </div>
 

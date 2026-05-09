@@ -57,7 +57,7 @@ export function ArtifactPanel({ threadId, open, onClose, wsArtifacts }: Artifact
   if (!open) return null;
 
   return (
-    <div className="w-[380px] shrink-0 border-l border-hxa-border bg-[rgba(10,15,26,0.6)] flex flex-col max-md:fixed max-md:inset-0 max-md:w-full max-md:z-[1000] max-md:bg-[#0a0f1a]">
+    <div className="w-[380px] shrink-0 border-l border-hxa-border theme-panel flex flex-col max-md:fixed max-md:inset-0 max-md:w-full max-md:z-[1000] max-md:bg-hxa-bg-modal">
       {/* Header */}
       <div className="flex items-center justify-between px-4 py-3 border-b border-hxa-border shrink-0">
         <h3 className="text-sm font-semibold text-hxa-text flex items-center gap-1.5">
@@ -99,11 +99,11 @@ function ArtifactCard({ artifact }: { artifact: Artifact }) {
   const icon = getTypeIcon(artifact.type);
 
   return (
-    <div className="border border-hxa-border rounded-lg overflow-hidden bg-black/20">
+    <div className="border border-hxa-border rounded-lg overflow-hidden theme-code">
       {/* Header — clickable */}
       <button
         onClick={() => setExpanded((e) => !e)}
-        className="w-full text-left px-3 py-2.5 flex items-center gap-2 hover:bg-white/[0.02] transition-colors"
+        className="w-full text-left px-3 py-2.5 flex items-center gap-2 hover:bg-hxa-bg-hover transition-colors"
       >
         {expanded ? <ChevronDown size={14} className="text-hxa-text-muted shrink-0" /> : <ChevronRight size={14} className="text-hxa-text-muted shrink-0" />}
         {icon}

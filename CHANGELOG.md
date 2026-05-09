@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.7.4] - 2026-05-09
+
+### Added
+- Linked light/dark theme support between the dashboard and landing site via shared `HXA_THEME` cookie (#271)
+
 ## [1.7.3] - 2026-04-02
 
 ### Fixed

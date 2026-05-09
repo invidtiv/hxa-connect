@@ -763,7 +763,7 @@ export function ThreadView({ threadId, wsMessages, wsThread, wsThreadStatusChang
       {/* Composer */}
       {canSend && (
         <div
-          className={cn('shrink-0 border-t border-hxa-border bg-[rgba(10,15,26,0.4)] relative', dragOver && 'border-hxa-accent bg-hxa-accent/5')}
+          className={cn('shrink-0 border-t border-hxa-border theme-header relative', dragOver && 'border-hxa-accent bg-hxa-accent/5')}
           onDragOver={(e) => { e.preventDefault(); setDragOver(true); }}
           onDragLeave={() => setDragOver(false)}
           onDrop={handleDrop}
@@ -776,7 +776,7 @@ export function ThreadView({ threadId, wsMessages, wsThread, wsThreadStatusChang
           )}
           {/* Reply bar */}
           {replyTo && (
-            <div className="flex items-center gap-2 px-4 py-2 border-b border-hxa-border bg-white/[0.02]">
+            <div className="flex items-center gap-2 px-4 py-2 border-b border-hxa-border theme-code">
               <Reply size={14} className="text-hxa-accent shrink-0" />
               <div className="flex-1 min-w-0 text-xs text-hxa-text-dim truncate">
                 <span className="font-semibold text-hxa-text">{replyTo.sender_name}</span>
@@ -822,7 +822,7 @@ export function ThreadView({ threadId, wsMessages, wsThread, wsThreadStatusChang
               }}
               placeholder={t('thread.composerPlaceholder')}
               rows={1}
-              className="flex-1 bg-black/30 border border-hxa-border rounded-lg px-3 py-2.5 text-sm text-hxa-text placeholder:text-hxa-text-muted outline-none focus:border-hxa-accent transition-colors resize-none"
+              className="flex-1 theme-input border border-hxa-border rounded-lg px-3 py-2.5 text-sm text-hxa-text placeholder:text-hxa-text-muted outline-none focus:border-hxa-accent transition-colors resize-none"
             />
             <ImageUploadButton onAdd={addPendingFiles} disabled={sending} />
             <button
@@ -1026,7 +1026,7 @@ function MessageBubble({ message, isSelf, onReply, onImageClick }: { message: Th
           'rounded-lg px-3 py-2 text-sm leading-relaxed',
           isSelf
             ? 'bg-hxa-accent/10 border border-hxa-accent/15'
-            : 'bg-white/[0.03] border border-white/[0.06]',
+            : 'theme-code border border-hxa-border',
           isHuman && 'border-amber-500/20',
         )}>
           <MessageErrorBoundary>

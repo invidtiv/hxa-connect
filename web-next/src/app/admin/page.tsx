@@ -34,8 +34,8 @@ function ConfirmDialog({ title, message, confirmLabel, danger, onConfirm, onCanc
   const canConfirm = !typeTo || typed === typeTo;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60" onClick={onCancel}>
-      <div className="bg-[#0d1a2d] border border-hxa-border rounded-xl p-6 max-w-md w-full mx-4 shadow-2xl" onClick={e => e.stopPropagation()}>
+    <div className="fixed inset-0 z-50 flex items-center justify-center theme-overlay" onClick={onCancel}>
+      <div className="theme-modal border border-hxa-border rounded-xl p-6 max-w-md w-full mx-4 shadow-2xl" onClick={e => e.stopPropagation()}>
         <h3 className="text-lg font-semibold mb-2">{title}</h3>
         <p className="text-hxa-text-dim text-sm mb-4">{message}</p>
         {typeTo && (
@@ -44,7 +44,7 @@ function ConfirmDialog({ title, message, confirmLabel, danger, onConfirm, onCanc
             placeholder={t('admin.confirm.typeTo', { value: typeTo })}
             value={typed}
             onChange={e => setTyped(e.target.value)}
-            className="w-full bg-black/30 border border-hxa-border rounded-lg px-3 py-2 text-sm font-mono mb-4 outline-none focus:border-hxa-accent"
+            className="w-full theme-input border border-hxa-border rounded-lg px-3 py-2 text-sm font-mono mb-4 outline-none focus:border-hxa-accent"
           />
         )}
         <div className="flex justify-end gap-3">
@@ -76,8 +76,8 @@ function SecretModal({ title, subtitle, orgId, secret, hint, onClose }: {
   const copyText = orgId ? `org id: ${orgId}\norg secret: ${secret}` : secret;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60" onClick={onClose}>
-      <div className="bg-[#0d1a2d] border border-hxa-border rounded-xl p-6 max-w-lg w-full mx-4 shadow-2xl" onClick={e => e.stopPropagation()}>
+    <div className="fixed inset-0 z-50 flex items-center justify-center theme-overlay" onClick={onClose}>
+      <div className="theme-modal border border-hxa-border rounded-xl p-6 max-w-lg w-full mx-4 shadow-2xl" onClick={e => e.stopPropagation()}>
         <div className="flex justify-between items-center mb-2">
           <h3 className="text-lg font-semibold">{title}</h3>
           <button onClick={onClose} className="text-hxa-text-dim hover:text-hxa-text"><X size={18} /></button>
@@ -86,7 +86,7 @@ function SecretModal({ title, subtitle, orgId, secret, hint, onClose }: {
         {orgId && (
           <div className="mb-3">
             <label className="text-xs text-hxa-text-dim mb-1 block">{t('admin.secret.orgId')}</label>
-            <div className="bg-black/30 border border-hxa-border rounded-lg px-3 py-2 font-mono text-sm text-hxa-accent break-all select-all">
+            <div className="theme-input border border-hxa-border rounded-lg px-3 py-2 font-mono text-sm text-hxa-accent break-all select-all">
               {orgId}
             </div>
           </div>
@@ -270,13 +270,13 @@ export default function AdminPage() {
           <h1 className="text-2xl font-bold gradient-text">{t('admin.title')}</h1>
           <p className="text-hxa-text-dim text-sm">{t('admin.subtitle')}</p>
         </div>
-        <form onSubmit={handleLogin} className="glass bg-[rgba(10,15,26,0.6)] border border-hxa-border rounded-xl p-8 w-full max-w-[400px] flex flex-col gap-4 shadow-[0_8px_32px_rgba(0,0,0,0.4)]">
+        <form onSubmit={handleLogin} className="glass theme-panel border border-hxa-border rounded-xl p-8 w-full max-w-[400px] flex flex-col gap-4 shadow-[0_8px_32px_rgba(0,0,0,0.4)]">
           <input
             type="password"
             placeholder={t('admin.placeholder.secret')}
             value={inputSecret}
             onChange={e => setInputSecret(e.target.value)}
-            className="bg-black/30 border border-hxa-border rounded-lg px-4 py-3 text-hxa-text font-mono text-sm outline-none focus:border-hxa-accent w-full"
+            className="theme-input border border-hxa-border rounded-lg px-4 py-3 text-hxa-text font-mono text-sm outline-none focus:border-hxa-accent w-full"
           />
           {loginError && <p className="text-hxa-red text-sm text-center">{loginError}</p>}
           <button type="submit" disabled={submitting} className="gradient-btn rounded-lg py-3 text-sm font-bold cursor-pointer disabled:opacity-50">
@@ -300,7 +300,7 @@ export default function AdminPage() {
           <button onClick={() => setSelectedOrg(null)} className="flex items-center gap-1.5 text-hxa-text-dim hover:text-hxa-accent text-sm mb-6 transition-colors">
             <ArrowLeft size={16} /> {t('admin.backToOrgs')}
           </button>
-          <div className="glass bg-[rgba(10,15,26,0.6)] border border-hxa-border rounded-xl p-6">
+          <div className="glass theme-panel border border-hxa-border rounded-xl p-6">
             <div className="flex items-center gap-3 mb-6">
               <Building2 size={24} className="text-hxa-accent" />
               <h2 className="text-xl font-bold">{selectedOrg.name}</h2>
@@ -313,7 +313,7 @@ export default function AdminPage() {
               <div><span className="text-hxa-text-dim">{t('admin.orgDetail.created')}</span> {new Date(selectedOrg.created_at).toLocaleDateString()}</div>
             </div>
             {selectedOrg.org_secret && (
-              <div className="mt-4 p-3 bg-black/30 border border-hxa-border rounded-lg">
+              <div className="mt-4 p-3 theme-input border border-hxa-border rounded-lg">
                 <span className="text-hxa-text-dim text-xs">{t('admin.orgDetail.secret')}</span>
                 <span className="font-mono text-sm ml-2 text-hxa-accent">{selectedOrg.org_secret.slice(0, 8)}...</span>
               </div>
@@ -344,7 +344,7 @@ export default function AdminPage() {
       }} />}
 
       {/* Header */}
-      <header className="border-b border-hxa-border bg-[rgba(10,15,26,0.8)] glass sticky top-0 z-10">
+      <header className="border-b border-hxa-border theme-header glass sticky top-0 z-10">
         <div className="max-w-7xl mx-auto px-4 md:px-8 py-3 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <img src={`${BASE_PATH}/images/logo.png`} alt="HXA-Connect" className="h-6" />
@@ -376,7 +376,7 @@ export default function AdminPage() {
             { label: t('admin.stat.totalBots'), value: totalBots, icon: Bot },
             { label: t('admin.stat.inviteCodes'), value: inviteCodes.length, icon: KeyRound },
           ].map(({ label, value, icon: Icon }) => (
-            <div key={label} className="glass bg-[rgba(10,15,26,0.6)] border border-hxa-border rounded-xl p-4 text-center">
+            <div key={label} className="glass theme-panel border border-hxa-border rounded-xl p-4 text-center">
               <Icon size={16} className="text-hxa-accent mx-auto mb-1.5" />
               <div className="text-2xl font-bold text-hxa-accent">{value}</div>
               <div className="text-xs text-hxa-text-dim uppercase tracking-wider">{label}</div>
@@ -392,10 +392,10 @@ export default function AdminPage() {
               <Plus size={14} /> {t('admin.createOrg')}
             </button>
           </div>
-          <div className="glass bg-[rgba(10,15,26,0.6)] border border-hxa-border rounded-xl overflow-hidden">
+          <div className="glass theme-panel border border-hxa-border rounded-xl overflow-hidden">
             <div className="max-h-[40vh] overflow-auto">
             <table className="w-full text-sm">
-              <thead className="sticky top-0 bg-[#0a0f1a] z-[1]">
+              <thead className="sticky top-0 theme-modal z-[1]">
                 <tr className="border-b border-hxa-border text-hxa-text-dim text-xs uppercase tracking-wider">
                   <th className="text-left px-4 py-3">{t('admin.table.name')}</th>
                   <th className="text-left px-4 py-3">{t('admin.table.id')}</th>
@@ -504,10 +504,10 @@ export default function AdminPage() {
               <Plus size={14} /> {t('admin.createCode')}
             </button>
           </div>
-          <div className="glass bg-[rgba(10,15,26,0.6)] border border-hxa-border rounded-xl overflow-hidden">
+          <div className="glass theme-panel border border-hxa-border rounded-xl overflow-hidden">
             <div className="max-h-[40vh] overflow-auto">
             <table className="w-full text-sm">
-              <thead className="sticky top-0 bg-[#0a0f1a] z-[1]">
+              <thead className="sticky top-0 theme-modal z-[1]">
                 <tr className="border-b border-hxa-border text-hxa-text-dim text-xs uppercase tracking-wider">
                   <th className="text-left px-4 py-3">{t('admin.table.label')}</th>
                   <th className="text-left px-4 py-3">{t('admin.table.code')}</th>
@@ -594,8 +594,8 @@ function CreateOrgModal({ onClose, onCreated }: {
   }
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60" onClick={onClose}>
-      <form onSubmit={handleSubmit} className="bg-[#0d1a2d] border border-hxa-border rounded-xl p-6 max-w-md w-full mx-4 shadow-2xl" onClick={e => e.stopPropagation()}>
+    <div className="fixed inset-0 z-50 flex items-center justify-center theme-overlay" onClick={onClose}>
+      <form onSubmit={handleSubmit} className="theme-modal border border-hxa-border rounded-xl p-6 max-w-md w-full mx-4 shadow-2xl" onClick={e => e.stopPropagation()}>
         <div className="flex justify-between items-center mb-4">
           <h3 className="text-lg font-semibold">{t('admin.createOrg.title')}</h3>
           <button type="button" onClick={onClose} className="text-hxa-text-dim hover:text-hxa-text"><X size={18} /></button>
@@ -605,7 +605,7 @@ function CreateOrgModal({ onClose, onCreated }: {
           placeholder={t('admin.createOrg.placeholder')}
           value={name}
           onChange={e => setName(e.target.value)}
-          className="w-full bg-black/30 border border-hxa-border rounded-lg px-4 py-3 text-sm outline-none focus:border-hxa-accent mb-3"
+          className="w-full theme-input border border-hxa-border rounded-lg px-4 py-3 text-sm outline-none focus:border-hxa-accent mb-3"
           autoFocus
         />
         {error && <p className="text-hxa-red text-sm mb-3">{error}</p>}
@@ -648,8 +648,8 @@ function CreateCodeModal({ onClose, onCreated }: {
   }
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60" onClick={onClose}>
-      <form onSubmit={handleSubmit} className="bg-[#0d1a2d] border border-hxa-border rounded-xl p-6 max-w-md w-full mx-4 shadow-2xl" onClick={e => e.stopPropagation()}>
+    <div className="fixed inset-0 z-50 flex items-center justify-center theme-overlay" onClick={onClose}>
+      <form onSubmit={handleSubmit} className="theme-modal border border-hxa-border rounded-xl p-6 max-w-md w-full mx-4 shadow-2xl" onClick={e => e.stopPropagation()}>
         <div className="flex justify-between items-center mb-4">
           <h3 className="text-lg font-semibold">{t('admin.createCode.title')}</h3>
           <button type="button" onClick={onClose} className="text-hxa-text-dim hover:text-hxa-text"><X size={18} /></button>
@@ -660,7 +660,7 @@ function CreateCodeModal({ onClose, onCreated }: {
             placeholder={t('admin.createCode.labelPlaceholder')}
             value={label}
             onChange={e => setLabel(e.target.value)}
-            className="bg-black/30 border border-hxa-border rounded-lg px-4 py-2.5 text-sm outline-none focus:border-hxa-accent"
+            className="theme-input border border-hxa-border rounded-lg px-4 py-2.5 text-sm outline-none focus:border-hxa-accent"
           />
           <div className="grid grid-cols-2 gap-3">
             <div>
@@ -669,7 +669,7 @@ function CreateCodeModal({ onClose, onCreated }: {
                 type="number"
                 value={maxUses}
                 onChange={e => setMaxUses(e.target.value)}
-                className="w-full bg-black/30 border border-hxa-border rounded-lg px-3 py-2 text-sm outline-none focus:border-hxa-accent font-mono"
+                className="w-full theme-input border border-hxa-border rounded-lg px-3 py-2 text-sm outline-none focus:border-hxa-accent font-mono"
               />
             </div>
             <div>
@@ -678,7 +678,7 @@ function CreateCodeModal({ onClose, onCreated }: {
                 type="number"
                 value={expiresIn}
                 onChange={e => setExpiresIn(e.target.value)}
-                className="w-full bg-black/30 border border-hxa-border rounded-lg px-3 py-2 text-sm outline-none focus:border-hxa-accent font-mono"
+                className="w-full theme-input border border-hxa-border rounded-lg px-3 py-2 text-sm outline-none focus:border-hxa-accent font-mono"
               />
             </div>
           </div>

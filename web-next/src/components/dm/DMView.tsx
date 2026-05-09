@@ -139,7 +139,7 @@ export function DMView({ channelId, wsDmMessages }: DMViewProps) {
   return (
     <div className="flex-1 flex flex-col min-h-0">
       {/* Header */}
-      <div className="shrink-0 px-4 py-3 border-b border-hxa-border bg-[rgba(10,15,26,0.4)]">
+      <div className="shrink-0 px-4 py-3 border-b border-hxa-border theme-header">
         <h2 className="text-sm font-semibold text-hxa-text">{t('dm.title')}</h2>
         <p className="text-[11px] text-hxa-text-muted mt-0.5">{t('dm.readOnlyNote')}</p>
       </div>
@@ -205,7 +205,7 @@ function DmBubble({ message, isSelf, onImageClick }: { message: DmMessage; isSel
         'rounded-lg px-3 py-2 text-sm leading-relaxed',
         isSelf
           ? 'bg-hxa-accent/10 border border-hxa-accent/15'
-          : 'bg-white/[0.03] border border-white/[0.06]',
+          : 'theme-code border border-hxa-border',
       )}>
         <DmMessageErrorBoundary>
           {parseParts(message.parts, message.content).map((part, i) => (

@@ -154,7 +154,7 @@ export function ThreadSettingsPanel({
   ];
 
   return (
-    <div className="w-[360px] shrink-0 border-l border-hxa-border bg-[rgba(10,15,26,0.6)] flex flex-col max-md:fixed max-md:inset-0 max-md:w-full max-md:z-[1000] max-md:bg-[#0a0f1a]">
+    <div className="w-[360px] shrink-0 border-l border-hxa-border theme-panel flex flex-col max-md:fixed max-md:inset-0 max-md:w-full max-md:z-[1000] max-md:bg-hxa-bg-modal">
       {/* Header */}
       <div className="flex items-center justify-between px-4 py-3 border-b border-hxa-border shrink-0">
         <h3 className="text-sm font-semibold text-hxa-text flex items-center gap-1.5">
@@ -187,8 +187,8 @@ export function ThreadSettingsPanel({
                   visibility === opt
                     ? 'bg-hxa-accent/20 text-hxa-accent border-hxa-accent/40'
                     : readOnly
-                    ? 'bg-black/10 text-hxa-text-muted border-hxa-border/50 cursor-not-allowed opacity-50'
-                    : 'bg-black/20 text-hxa-text-dim border-hxa-border hover:border-hxa-text-dim'
+                    ? 'theme-code text-hxa-text-muted border-hxa-border/50 cursor-not-allowed opacity-50'
+                    : 'theme-code text-hxa-text-dim border-hxa-border hover:border-hxa-text-dim'
                 }`}
               >
                 {t(`thread.visibility.${opt}`)}
@@ -214,8 +214,8 @@ export function ThreadSettingsPanel({
                     joinPolicy === opt
                       ? 'bg-hxa-accent/20 text-hxa-accent border-hxa-accent/40'
                       : isDisabled
-                      ? 'bg-black/10 text-hxa-text-muted border-hxa-border/50 cursor-not-allowed opacity-50'
-                      : 'bg-black/20 text-hxa-text-dim border-hxa-border hover:border-hxa-text-dim'
+                      ? 'theme-code text-hxa-text-muted border-hxa-border/50 cursor-not-allowed opacity-50'
+                      : 'theme-code text-hxa-text-dim border-hxa-border hover:border-hxa-text-dim'
                   }`}
                 >
                   {t(`thread.joinPolicy.${opt}`)}
@@ -235,7 +235,7 @@ export function ThreadSettingsPanel({
               const mode = permModes[action] ?? 'unrestricted';
               const customs = customLabels[action] ?? [];
               return (
-                <div key={action} className="border border-hxa-border rounded-lg p-2.5 bg-black/20">
+                <div key={action} className="border border-hxa-border rounded-lg p-2.5 theme-code">
                   <div className="flex items-center justify-between mb-2">
                     <span className="text-xs font-medium text-hxa-text">
                       {t(`thread.permissions.${action}`)}
@@ -254,7 +254,7 @@ export function ThreadSettingsPanel({
                             : opt.value === 'initiator' ? 'bg-amber-500/20 text-amber-400 border-amber-500/40'
                             : opt.value === 'custom' ? 'bg-hxa-accent/20 text-hxa-accent border-hxa-accent/40'
                             : 'bg-slate-500/20 text-slate-400 border-slate-500/40'
-                            : 'bg-black/20 text-hxa-text-muted border-hxa-border hover:border-hxa-text-dim'
+                            : 'theme-code text-hxa-text-muted border-hxa-border hover:border-hxa-text-dim'
                         }`}
                       >
                         {t(opt.labelKey)}
@@ -294,7 +294,7 @@ export function ThreadSettingsPanel({
                             onKeyDown={e => { if (e.key === 'Enter') { e.preventDefault(); handleAddCustomLabel(action); } }}
                             placeholder={t('thread.permissions.addLabel')}
                             maxLength={64}
-                            className="flex-1 text-[11px] px-2 py-1 bg-black/30 border border-hxa-border rounded text-hxa-text placeholder:text-hxa-text-muted focus:outline-none focus:border-hxa-accent/50"
+                            className="flex-1 text-[11px] px-2 py-1 theme-input border border-hxa-border rounded text-hxa-text placeholder:text-hxa-text-muted focus:outline-none focus:border-hxa-accent/50"
                           />
                           <button
                             onClick={() => handleAddCustomLabel(action)}

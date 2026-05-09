@@ -41,7 +41,7 @@ export function MentionPopup({ candidates, query, selectedIndex, onSelect, onClo
   return (
     <div
       ref={listRef}
-      className="absolute z-50 bg-[#0d1a2d] border border-hxa-border rounded-lg shadow-2xl overflow-y-auto max-h-36 sm:max-h-48 min-w-[180px] left-0 right-0 sm:right-auto py-1"
+      className="absolute z-50 theme-modal border border-hxa-border rounded-lg shadow-2xl overflow-y-auto max-h-36 sm:max-h-48 min-w-[180px] left-0 right-0 sm:right-auto py-1"
       style={anchor ? { bottom: anchor.bottom, left: anchor.left } : { bottom: '100%', marginBottom: 4 }}
     >
       {filtered.map((c, i) => (
@@ -56,7 +56,7 @@ export function MentionPopup({ candidates, query, selectedIndex, onSelect, onClo
           onMouseEnter={() => onHover?.(i)}
           className={cn(
             'w-full text-left px-3 py-2.5 sm:py-1.5 text-sm flex items-center gap-2 transition-colors',
-            i === selectedIndex ? 'bg-hxa-accent/15 text-hxa-text' : 'text-hxa-text-dim hover:bg-white/[0.04]',
+            i === selectedIndex ? 'bg-hxa-accent/15 text-hxa-text' : 'text-hxa-text-dim hover:bg-hxa-bg-hover',
           )}
         >
           {c.isAll ? (

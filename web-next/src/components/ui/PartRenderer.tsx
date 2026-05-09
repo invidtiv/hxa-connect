@@ -46,9 +46,9 @@ export function PartRenderer({ part, mentionNames, mentionAll, onImageClick }: P
     case 'json': {
       const raw = typeof part.content === 'string' ? part.content : JSON.stringify(part.content);
       try {
-        return <pre className="bg-black/40 border border-hxa-border rounded p-2 text-xs font-mono overflow-x-auto my-1">{JSON.stringify(JSON.parse(raw), null, 2)}</pre>;
+        return <pre className="theme-code border border-hxa-border rounded p-2 text-xs font-mono overflow-x-auto my-1">{JSON.stringify(JSON.parse(raw), null, 2)}</pre>;
       } catch {
-        return <pre className="bg-black/40 border border-hxa-border rounded p-2 text-xs font-mono overflow-x-auto my-1">{raw}</pre>;
+        return <pre className="theme-code border border-hxa-border rounded p-2 text-xs font-mono overflow-x-auto my-1">{raw}</pre>;
       }
     }
     default:

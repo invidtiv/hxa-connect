@@ -46,7 +46,7 @@ export function FilterSelect({
         value={value}
         onChange={(e) => onChange(e.target.value)}
         className={cn(
-          'w-full bg-black/30 border border-hxa-border rounded-lg pr-3 text-hxa-text outline-none focus:border-hxa-accent transition-colors appearance-none cursor-pointer',
+          'w-full theme-input border border-hxa-border rounded-lg pr-3 text-hxa-text outline-none focus:border-hxa-accent transition-colors appearance-none cursor-pointer',
           icon ? (size === 'sm' ? 'pl-8' : 'pl-9') : (size === 'sm' ? 'px-2' : 'px-3'),
           sizeClasses,
           className,

@@ -1,29 +1,100 @@
 @import 'tailwindcss';
 
+/* ─── HXA Theme Palettes ─── */
+:root,
+:root[data-theme='light'] {
+  --hxa-bg: #f7faf9;
+  --hxa-bg-secondary: rgba(255, 255, 255, 0.78);
+  --hxa-bg-tertiary: rgba(241, 245, 249, 0.92);
+  --hxa-bg-hover: rgba(13, 148, 136, 0.07);
+  --hxa-bg-panel: rgba(255, 255, 255, 0.9);
+  --hxa-bg-input: rgba(255, 255, 255, 0.86);
+  --hxa-bg-modal: #ffffff;
+  --hxa-bg-overlay: rgba(15, 23, 42, 0.32);
+
+  --hxa-border: rgba(15, 118, 110, 0.16);
+  --hxa-border-focus: rgba(14, 165, 163, 0.45);
+  --hxa-border-glow: rgba(13, 148, 136, 0.28);
+
+  --hxa-text: #101827;
+  --hxa-text-dim: #526170;
+  --hxa-text-muted: #7a8794;
+
+  --hxa-accent: #0d9488;
+  --hxa-accent-dim: #ccfbf1;
+  --hxa-accent-hover: #0f766e;
+
+  --hxa-green: #059669;
+  --hxa-red: #e11d48;
+  --hxa-blue: #2563eb;
+  --hxa-purple: #6366f1;
+  --hxa-amber: #d97706;
+
+  --hxa-glow-1: rgba(45, 212, 191, 0.13);
+  --hxa-glow-2: rgba(99, 102, 241, 0.09);
+  --hxa-card-shadow: 0 18px 42px rgba(15, 23, 42, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+:root[data-theme='dark'] {
+  --hxa-bg: #030614;
+  --hxa-bg-secondary: rgba(16, 22, 36, 0.6);
+  --hxa-bg-tertiary: rgba(30, 41, 59, 0.5);
+  --hxa-bg-hover: rgba(45, 212, 191, 0.06);
+  --hxa-bg-panel: rgba(10, 15, 26, 0.6);
+  --hxa-bg-input: rgba(0, 0, 0, 0.3);
+  --hxa-bg-modal: #0d1a2d;
+  --hxa-bg-overlay: rgba(0, 0, 0, 0.6);
+
+  --hxa-border: rgba(45, 212, 191, 0.15);
+  --hxa-border-focus: rgba(45, 212, 191, 0.5);
+  --hxa-border-glow: rgba(45, 212, 191, 0.3);
+
+  --hxa-text: #f8fafc;
+  --hxa-text-dim: #94a3b8;
+  --hxa-text-muted: #64748b;
+
+  --hxa-accent: #2dd4bf;
+  --hxa-accent-dim: #115e59;
+  --hxa-accent-hover: #5eead4;
+
+  --hxa-green: #10b981;
+  --hxa-red: #f43f5e;
+  --hxa-blue: #3b82f6;
+  --hxa-purple: #8b5cf6;
+  --hxa-amber: #f59e0b;
+
+  --hxa-glow-1: rgba(139, 92, 246, 0.08);
+  --hxa-glow-2: rgba(45, 212, 191, 0.06);
+  --hxa-card-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
 /* ─── HXA Theme Variables ─── */
 @theme {
-  --color-hxa-bg: #030614;
-  --color-hxa-bg-secondary: rgba(16, 22, 36, 0.6);
-  --color-hxa-bg-tertiary: rgba(30, 41, 59, 0.5);
-  --color-hxa-bg-hover: rgba(45, 212, 191, 0.06);
+  --color-hxa-bg: var(--hxa-bg);
+  --color-hxa-bg-secondary: var(--hxa-bg-secondary);
+  --color-hxa-bg-tertiary: var(--hxa-bg-tertiary);
+  --color-hxa-bg-hover: var(--hxa-bg-hover);
+  --color-hxa-bg-panel: var(--hxa-bg-panel);
+  --color-hxa-bg-input: var(--hxa-bg-input);
+  --color-hxa-bg-modal: var(--hxa-bg-modal);
 
-  --color-hxa-border: rgba(45, 212, 191, 0.15);
-  --color-hxa-border-focus: rgba(45, 212, 191, 0.5);
-  --color-hxa-border-glow: rgba(45, 212, 191, 0.3);
+  --color-hxa-border: var(--hxa-border);
+  --color-hxa-border-focus: var(--hxa-border-focus);
+  --color-hxa-border-glow: var(--hxa-border-glow);
 
-  --color-hxa-text: #f8fafc;
-  --color-hxa-text-dim: #94a3b8;
-  --color-hxa-text-muted: #64748b;
+  --color-hxa-text: var(--hxa-text);
+  --color-hxa-text-dim: var(--hxa-text-dim);
+  --color-hxa-text-muted: var(--hxa-text-muted);
 
-  --color-hxa-accent: #2dd4bf;
-  --color-hxa-accent-dim: #115e59;
-  --color-hxa-accent-hover: #5eead4;
+  --color-hxa-accent: var(--hxa-accent);
+  --color-hxa-accent-dim: var(--hxa-accent-dim);
+  --color-hxa-accent-hover: var(--hxa-accent-hover);
 
-  --color-hxa-green: #10b981;
-  --color-hxa-red: #f43f5e;
-  --color-hxa-blue: #3b82f6;
-  --color-hxa-purple: #8b5cf6;
-  --color-hxa-amber: #f59e0b;
+  --color-hxa-green: var(--hxa-green);
+  --color-hxa-red: var(--hxa-red);
+  --color-hxa-blue: var(--hxa-blue);
+  --color-hxa-purple: var(--hxa-purple);
+  --color-hxa-amber: var(--hxa-amber);
 
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-mono: 'JetBrains Mono', 'Consolas', monospace;
@@ -36,8 +107,8 @@ html, body {
   height: 100%;
   overflow: hidden;
   background-image:
-    radial-gradient(circle at 15% 0%, rgba(139, 92, 246, 0.08) 0%, transparent 60%),
-    radial-gradient(circle at 85% 100%, rgba(45, 212, 191, 0.06) 0%, transparent 50%);
+    radial-gradient(circle at 15% 0%, var(--hxa-glow-1) 0%, transparent 60%),
+    radial-gradient(circle at 85% 100%, var(--hxa-glow-2) 0%, transparent 50%);
 }
 
 /* ─── Scrollbar ─── */
@@ -58,6 +129,35 @@ html, body {
 .gradient-btn {
   background: linear-gradient(135deg, #2dd4bf 0%, #818cf8 100%);
   color: #030614;
+}
+
+.theme-panel {
+  background: var(--hxa-bg-panel);
+  box-shadow: var(--hxa-card-shadow);
+}
+
+.theme-header {
+  background: var(--hxa-bg-secondary);
+}
+
+.theme-sidebar {
+  background: var(--hxa-bg-secondary);
+}
+
+.theme-input {
+  background: var(--hxa-bg-input);
+}
+
+.theme-modal {
+  background: var(--hxa-bg-modal);
+}
+
+.theme-overlay {
+  background: var(--hxa-bg-overlay);
+}
+
+.theme-code {
+  background: var(--hxa-bg-tertiary);
 }
 
 /* ─── Glass Effect ─── */
